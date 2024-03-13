@@ -25,4 +25,9 @@ app.MapGet("/ToDoItems", async (ToDoItemService todoItems) =>
     await todoItems.GetAllAsync();
 });
 
+app.MapGet("/ToDoItems/{id:int}", async (ToDoItemService todoItems, int id, CancellationToken cancellationToken) =>
+{
+    await todoItems.GetToDoItemByIdAsync(id, cancellationToken);
+});
+
 app.Run();

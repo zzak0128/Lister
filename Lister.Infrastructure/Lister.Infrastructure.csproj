@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Lister.Application\Lister.Application.csproj" />
     <ProjectReference Include="..\Lister.Library\Lister.Library.csproj" />
   </ItemGroup>
 

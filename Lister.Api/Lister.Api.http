@@ -4,3 +4,6 @@ GET {{Lister.Api_HostAddress}}/ToDoItems/
 Accept: application/json
 
 ###
+
+GET {{Lister.Api_HostAddress}}/ToDoItems/5
+Accept: application/json
