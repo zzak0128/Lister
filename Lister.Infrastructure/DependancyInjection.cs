@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Lister.Infrastructure.Services;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -14,6 +15,9 @@ public static class DependancyInjection
         options.UseMySql(
             connectionString, ServerVersion.AutoDetect(connectionString),
         b => b.MigrationsAssembly(typeof(ListerDbContext).Assembly.FullName)));
+
+        services.AddScoped<ToDoItemService>();
+        services.AddScoped<ToDoListService>();
 
         return services;
     }
