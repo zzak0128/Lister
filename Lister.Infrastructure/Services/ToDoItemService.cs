@@ -1,4 +1,6 @@
-﻿using Lister.Application.Exceptions;
+﻿using Lister.Application.DTOs.ToDoItems;
+using Lister.Application.Exceptions;
+using Lister.Library.Enums;
 using Lister.Library.Models;
 using Microsoft.EntityFrameworkCore;
 using MySqlConnector;
@@ -14,35 +16,65 @@ public class ToDoItemService
         _context = context;
     }
 
-    public async Task<List<ToDoItem>> GetAllAsync()
+    public async Task<List<ToDoDisplayDto>> GetAllAsync()
     {
-        return await _context.ToDoItems.OrderBy(x => x.Title).ToListAsync();
+        List<ToDoDisplayDto> todos = await _context.ToDoItems
+            .OrderBy(x => x.Title)
+            .Select(x => new ToDoDisplayDto
+        {
+            Id = x.Id,
+            Title = x.Title,
+            Description = x.Description,
+            State = x.State,
+            DateCreated = x.DateCreated,
+            ToDoList = x.ToDoList
+        }).ToListAsync();
+
+        return todos;
     }
 
-    public async Task<ToDoItem> GetToDoItemByIdAsync(int id, CancellationToken cancellationToken)
+    public async Task<ToDoDisplayDto> GetToDoItemByIdAsync(int id)
     {
-        ToDoItem? output = null;
+        ToDoItem? todo = null;
         try
         {
-            output = await _context.ToDoItems.FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
-
+            todo = await _context.ToDoItems.FirstOrDefaultAsync(x => x.Id == id);
         }
         catch (MySqlException)
         {
             Console.WriteLine($"Unable to connect to the MySql Database.");
         }
 
-        if (output == null)
+        if (todo == null)
         {
             throw new InvalidIdException(id);
         }
 
-        return output;
+        ToDoDisplayDto dto = new()
+        {
+            Id = todo.Id,
+            Title = todo.Title,
+            Description = todo.Description,
+            State = todo.State,
+            DateCreated = todo.DateCreated,
+            ToDoList = todo.ToDoList
+        };
+
+        return dto;
     }
 
-    public async Task AddToDoItem(ToDoItem item)
+    public async Task AddToDoItem(ToDoAddDto dto)
     {
-        _context.ToDoItems.Add(item);
+        ToDoItem todo = new()
+        {
+            Title = dto.Title,
+            Description = dto.Description,
+            DateCreated = DateTime.Now,
+            State = ItemState.ToDo,
+            ToDoList = dto.ToDoList
+        };
+
+        _context.ToDoItems.Add(todo);
         await _context.SaveChangesAsync();
     }
 }

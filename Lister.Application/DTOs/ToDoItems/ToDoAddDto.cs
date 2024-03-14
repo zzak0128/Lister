@@ -1,0 +1,12 @@
+﻿using Lister.Library.Models;
+
+namespace Lister.Application.DTOs.ToDoItems;
+
+public class ToDoAddDto
+{
+    public string Title { get; set; } = "";
+
+    public string Description { get; set; } = "";
+
+    public ToDoList ToDoList { get; set; }
+}

@@ -20,14 +20,22 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+// To Do Items
 app.MapGet("/ToDoItems", async (ToDoItemService todoItems) =>
 {
     await todoItems.GetAllAsync();
 });
 
-app.MapGet("/ToDoItems/{id:int}", async (ToDoItemService todoItems, int id, CancellationToken cancellationToken) =>
+app.MapGet("/ToDoItems/{id:int}", async (ToDoItemService todoItems, int id) =>
 {
-    await todoItems.GetToDoItemByIdAsync(id, cancellationToken);
+    await todoItems.GetToDoItemByIdAsync(id);
 });
+
+// To Do Lists
+app.MapGet("/ToDoLists", async (ToDoListService todoItems) =>
+{
+    await todoItems.GetAllAsync();
+});
+
 
 app.Run();
