@@ -15,5 +15,5 @@ public class ToDoDisplayDto
 
     public DateTime DateCreated { get; set; }
 
-    public virtual ToDoList ToDoList { get; set; }
+    public virtual ToDoList? ToDoList { get; set; }
 }

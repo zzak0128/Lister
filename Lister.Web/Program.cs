@@ -1,7 +1,10 @@
+using Lister.Infrastructure;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddInfrastructure(builder.Configuration);
 
 var app = builder.Build();
 

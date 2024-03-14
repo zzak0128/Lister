@@ -14,5 +14,5 @@ public class ToDoItem
 
     public DateTime DateCreated { get; set; } = DateTime.Now;
 
-    public virtual ToDoList ToDoList { get; set; }
+    public virtual ToDoList? ToDoList { get; set; }
 }

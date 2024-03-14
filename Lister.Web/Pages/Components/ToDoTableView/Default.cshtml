@@ -1,0 +1,31 @@
+﻿@using Lister.Application.DTOs.ToDoItems
+@model List<ToDoDisplayDto>
+
+@if (!Model.Any())
+{
+    <p>No Items are available</p>
+}
+else
+{
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>State</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var item in Model)
+                {
+                    <tr>
+                        <td>@item.Title</td>
+                        <td>@item.Description</td>
+                        <td>@item.State.ToString()</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
