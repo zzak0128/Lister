@@ -12,4 +12,11 @@ public class ListerDbContext : DbContext
     public ListerDbContext(DbContextOptions<ListerDbContext> options) : base(options)
     {
     }
+
+    protected override void OnModelCreating(ModelBuilder builder)
+    {
+        builder.Entity<ToDoItem>()
+        .Property(x => x.State)
+        .HasConversion<int>();
+    }
 }

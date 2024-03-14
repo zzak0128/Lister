@@ -4,11 +4,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Lister.Web.Pages.Components.ToDoTableView
 {
-    public class ToDoTableViewComponent : ViewComponent
+    public class ToDoTableViewViewComponent : ViewComponent
     {
         private readonly ToDoItemService _todoItems;
 
-        public ToDoTableViewComponent(ToDoItemService todoItems)
+        public ToDoTableViewViewComponent(ToDoItemService todoItems)
         {
             _todoItems = todoItems;
         }
