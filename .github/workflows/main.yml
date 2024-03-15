@@ -23,10 +23,10 @@ jobs:
       with:
         local: /home/runner/work/Lister/Lister/deploy
         remote: ${{ secrets.REMOTE_TARGET }}
+        privateKey: ${{ secrets.REMOTE_SSH_KEY }}
         host: ${{ secrets.REMOTE_HOST }}
-        port: ${{ secrets.PORT }}
+        port: ${{ secrets.REMOTE_PORT }}
         username: ${{ secrets.REMOTE_USER }}
-        password: ${{ secrets.REMOTE_PASSWORD }}
     - name: Run SSH Command
       uses: garygrossgarten/github-action-ssh@0.7.0
       with:
