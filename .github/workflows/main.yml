@@ -16,10 +16,6 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 8.0.x
-    - name: Install Dependancies
-      run: Dotnet restore /home/runner/work/Lister/Lister
-    - name: Build
-      run: dotnet build /home/runner/work/Lister/Lister --configuration Release --no-restore
     - name: Dotnet Publish
       run: dotnet publish /home/runner/work/Lister/Lister/Lister.Web -c Release -o deploy
     - name: Copy via ssh
