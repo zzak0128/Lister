@@ -26,7 +26,6 @@ jobs:
         host: ${{ secrets.REMOTE_HOST }}
         port: ${{ secrets.PORT }}
         username: ${{ secrets.REMOTE_USER }}
-        privateKey: ${{ secrets.REMOTE_SSH_KEY }}
         password: ${{ secrets.REMOTE_PASSWORD }}
     - name: Run SSH Command
       uses: garygrossgarten/github-action-ssh@0.7.0
