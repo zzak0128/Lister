@@ -1,0 +1,37 @@
+name: Lister - build and Deploy
+
+on:
+  push:
+    branches:
+    - main
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x
+    - name: Dotnet Publish
+      run: dotnet publish /home/runner/work/Lister/Lister/Lister.Web -c Release -o  /home/runner/work/Lister/Lister/deploy
+    - name: Copy via ssh
+      uses: garygrossgarten/github-action-scp@v0.8.0
+      with:
+        local: /home/runner/work/Lister/Lister/deploy
+        remote: ${{ secrets.REMOTE_TARGET }}
+        password: ${{ secrets.REMOTE_PASSWORD }}
+        host: ${{ secrets.REMOTE_HOST }}
+        port: ${{ secrets.REMOTE_PORT }}
+        username: ${{ secrets.REMOTE_USER }}
+    - name: Run SSH Command
+      uses: garygrossgarten/github-action-ssh@0.7.0
+      with:
+        command: sudo service lister.service restart
+        port: ${{ secrets.REMOTE_PORT }}
+        host: ${{ secrets.REMOTE_HOST }}
+        username: ${{ secrets.REMOTE_USER }}
+        password: ${{ secrets.REMOTE_PASSWORD }}
