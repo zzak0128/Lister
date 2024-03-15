@@ -17,11 +17,11 @@ jobs:
       with:
         dotnet-version: 8.0.x
     - name: Dotnet Publish
-      run: dotnet publish /home/runner/work/Lister/Lister/Lister.Web -c Release -o deploy
+      run: dotnet publish /home/runner/work/Lister/Lister/Lister.Web -c Release -o  /home/runner/work/Lister/Lister/deploy
     - name: Copy via ssh
       uses: garygrossgarten/github-action-scp@v0.8.0
       with:
-        local: /home/runner/work/deferat/src/deploy/
+        local: /home/runner/work/Lister/Lister/deploy
         remote: ${{ secrets.REMOTE_TARGET }}
         host: ${{ secrets.REMOTE_HOST }}
         port: ${{ secrets.PORT }}
