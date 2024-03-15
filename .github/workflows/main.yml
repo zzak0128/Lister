@@ -11,13 +11,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v4
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 8.0.x
     - name: Dotnet Publish
-      run: dotnet publish src -c Release -o deploy
+      run: dotnet publish src/lister.web -c Release -o deploy
     - name: Copy via ssh
       uses: garygrossgarten/github-action-scp@v0.8.0
       with:
