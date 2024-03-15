@@ -27,11 +27,11 @@ jobs:
         host: ${{ secrets.REMOTE_HOST }}
         port: ${{ secrets.REMOTE_PORT }}
         username: ${{ secrets.REMOTE_USER }}
-    - name: Run SSH Command
-      uses: garygrossgarten/github-action-ssh@0.7.0
-      with:
-        command: sudo service lister.service restart
-        port: ${{ secrets.REMOTE_PORT }}
-        host: ${{ secrets.REMOTE_HOST }}
-        username: ${{ secrets.REMOTE_USER }}
-        password: ${{ secrets.REMOTE_PASSWORD }}
+    #- name: Run SSH Command
+     # uses: garygrossgarten/github-action-ssh@0.7.0
+      #with:
+       # command: sudo service lister.service restart
+        #port: ${{ secrets.REMOTE_PORT }}
+        #host: ${{ secrets.REMOTE_HOST }}
+        #username: ${{ secrets.REMOTE_USER }}
+        #password: ${{ secrets.REMOTE_PASSWORD }}
