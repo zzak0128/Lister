@@ -10,7 +10,7 @@ public static class DependancyInjection
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
 
-        var connectionString = configuration.GetConnectionString("default");
+        var connectionString = configuration.GetConnectionString("Lister");
         services.AddDbContextPool<ListerDbContext>(options =>
         options.UseMySql(
             connectionString, ServerVersion.AutoDetect(connectionString),
