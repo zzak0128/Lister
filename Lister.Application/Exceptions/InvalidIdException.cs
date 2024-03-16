@@ -20,8 +20,4 @@ public class InvalidIdException : Exception
     public InvalidIdException(string? message, Exception? innerException) : base(message, innerException)
     {
     }
-
-    protected InvalidIdException(SerializationInfo info, StreamingContext context) : base(info, context)
-    {
-    }
 }

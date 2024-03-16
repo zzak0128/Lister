@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Lister.Web.Pages
 {
+    [ValidateAntiForgeryToken]
     public class IndexModel : PageModel
     {
         private readonly ToDoItemService _todoItems;
@@ -14,6 +15,9 @@ namespace Lister.Web.Pages
             _todoItems = todoItems;
         }
 
+        [BindProperty(SupportsGet = true)]    
+        public ToDoAddDto NewToDo { get; set; }
+
         public List<ToDoDisplayDto> ToDoItems { get; set; }
 
         public async Task<IActionResult> OnGetAsync()
@@ -21,6 +25,13 @@ namespace Lister.Web.Pages
             ToDoItems = await _todoItems.GetAllAsync();
 
             return Page();
+        }
+
+        public async Task<IActionResult> OnPostSaveTodoAsync()
+        {
+            await _todoItems.AddToDoItemAsync(NewToDo);
+
+            return RedirectToPage();
         }
     }
 }

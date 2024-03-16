@@ -8,5 +8,7 @@ public class ToDoAddDto
 
     public string Description { get; set; } = "";
 
+    public DateTime? DueDate { get; set; }
+
     public ToDoList ToDoList { get; set; }
 }

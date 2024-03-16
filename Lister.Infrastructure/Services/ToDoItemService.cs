@@ -26,6 +26,7 @@ public class ToDoItemService
             Title = x.Title,
             Description = x.Description,
             State = x.State,
+            DueDate = x.DueDate,
             DateCreated = x.DateCreated,
             ToDoList = x.ToDoList
         }).ToListAsync();
@@ -55,6 +56,7 @@ public class ToDoItemService
             Id = todo.Id,
             Title = todo.Title,
             Description = todo.Description,
+            DueDate = todo.DueDate,
             State = todo.State,
             DateCreated = todo.DateCreated,
             ToDoList = todo.ToDoList
@@ -63,12 +65,13 @@ public class ToDoItemService
         return dto;
     }
 
-    public async Task AddToDoItem(ToDoAddDto dto)
+    public async Task AddToDoItemAsync(ToDoAddDto dto)
     {
         ToDoItem todo = new()
         {
             Title = dto.Title,
             Description = dto.Description,
+            DueDate = dto.DueDate,
             DateCreated = DateTime.Now,
             State = ItemState.ToDo,
             ToDoList = dto.ToDoList

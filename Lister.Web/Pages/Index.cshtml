@@ -4,9 +4,15 @@
     ViewData["Title"] = "Home page";
 }
 
+@Html.AntiForgeryToken()
+
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <form asp-page-handler="SaveTodo">
+        <input type="submit" class="btn btn-primary" />
+        <input type="text" class="form-control" placeholder="New ToDo" asp-for="@Model.NewToDo.Title" />
+        <textarea class="form-control" placeholder="Description" asp-for="@Model.NewToDo.Description"></textarea>
+        <input type="date" class="form-control" asp-for="@Model.NewToDo.DueDate" />
+    </form>
 </div>
 
 @await Component.InvokeAsync(nameof(Components.ToDoTableView))

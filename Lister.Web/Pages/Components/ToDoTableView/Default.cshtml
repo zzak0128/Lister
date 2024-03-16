@@ -1,4 +1,5 @@
 ﻿@using Lister.Application.DTOs.ToDoItems
+@using Lister.Application.Extensions
 @model List<ToDoDisplayDto>
 
 @if (!Model.Any())
@@ -14,6 +15,7 @@ else
                     <th>Title</th>
                     <th>Description</th>
                     <th>State</th>
+                    <th>Due Date</th>
                 </tr>
             </thead>
             <tbody>
@@ -23,6 +25,7 @@ else
                         <td>@item.Title</td>
                         <td>@item.Description</td>
                         <td>@item.State</td>
+                        <td>@item.DueDate.ToDateString()</td>
                     </tr>
                 }
             </tbody>

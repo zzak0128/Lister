@@ -12,6 +12,8 @@ public class ToDoItem
 
     public ItemState State { get; set; } = ItemState.ToDo;
 
+    public DateTime? DueDate { get; set; }
+
     public DateTime DateCreated { get; set; } = DateTime.Now;
 
     public virtual ToDoList? ToDoList { get; set; }

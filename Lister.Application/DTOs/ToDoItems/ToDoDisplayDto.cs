@@ -13,6 +13,8 @@ public class ToDoDisplayDto
 
     public ItemState State { get; set; }
 
+    public DateTime? DueDate { get; set; }
+
     public DateTime DateCreated { get; set; }
 
     public virtual ToDoList? ToDoList { get; set; }
