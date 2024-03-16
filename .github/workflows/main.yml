@@ -18,6 +18,13 @@ jobs:
         dotnet-version: 8.0.x
     - name: Dotnet Publish
       run: dotnet publish /home/runner/work/Lister/Lister/Lister.Web -c Release -o  /home/runner/work/Lister/Lister/deploy
+     #substitute production appsettings entries to appsettings json file
+    - name: App Settings Variable Substitution
+      uses: microsoft/variable-substitution@v1
+      with:
+        files: '${{env.DOTNET_ROOT}}/myapp/appsettings.json'
+      env:
+        ConnectionStrings.Lister: ${{ secrets.CONNECTION_LISTER }}
     - name: Copy via ssh
       uses: garygrossgarten/github-action-scp@v0.8.0
       with:
@@ -27,11 +34,11 @@ jobs:
         host: ${{ secrets.REMOTE_HOST }}
         port: ${{ secrets.REMOTE_PORT }}
         username: ${{ secrets.REMOTE_USER }}
-    - name: Run SSH Command
-      uses: garygrossgarten/github-action-ssh@0.7.0
-      with:
-        command: sudo service lister.service restart
-        port: ${{ secrets.REMOTE_PORT }}
-        host: ${{ secrets.REMOTE_HOST }}
-        username: ${{ secrets.REMOTE_USER }}
-        password: ${{ secrets.REMOTE_PASSWORD }}
+    #- name: Run SSH Command
+     # uses: garygrossgarten/github-action-ssh@0.7.0
+      #with:
+       # command: sudo service lister.service restart
+        #port: ${{ secrets.REMOTE_PORT }}
+        #host: ${{ secrets.REMOTE_HOST }}
+        #username: ${{ secrets.REMOTE_USER }}
+        #password: ${{ secrets.REMOTE_PASSWORD }}
