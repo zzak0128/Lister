@@ -112,4 +112,17 @@ public class ToDoItemService
         _context.Update(itemToUpdate);
         await _context.SaveChangesAsync();
     }
+
+    public async Task DeleteItemAsync(int id)
+    {
+        ToDoItem deleteTodo = await _context.ToDoItems.FindAsync(id);
+
+        if (deleteTodo == null) 
+        {
+            throw new InvalidIdException(id);
+        }
+
+        _context.ToDoItems.Remove(deleteTodo);
+        await _context.SaveChangesAsync();
+    }
 }

@@ -1,5 +1,6 @@
 using Lister.Application.DTOs.ToDoItems;
 using Lister.Infrastructure.Services;
+using Lister.Library.Enums;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -32,6 +33,20 @@ namespace Lister.Web.Pages
             await _todoItems.AddToDoItemAsync(NewToDo);
 
             return RedirectToPage();
+        }
+
+        public async Task<IActionResult> OnPostDeleteAsync(int id)
+        {
+            await _todoItems.DeleteItemAsync(id);
+
+            return ViewComponent(nameof(Components.ToDoTableView));
+        }
+
+        public async Task<IActionResult> OnPostUpdateStatusAsync(int id, ItemState state)
+        {
+            await _todoItems.UpdateItemStatusAsync(id, state);
+
+            return ViewComponent(nameof(Components.ToDoTableView));
         }
     }
 }
