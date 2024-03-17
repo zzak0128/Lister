@@ -1,7 +1,11 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Inbox";
+}
+
+@section Scripts {
+    <script src="~/js/todoitems.js"></script>
 }
 
 @Html.AntiForgeryToken()

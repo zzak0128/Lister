@@ -1,0 +1,7 @@
+﻿@page
+@model MyApp.Namespace.InProgressModel
+@{
+    ViewData["Title"] = "In Progress Items";
+}
+
+@await Component.InvokeAsync(nameof(Components.ToDoTableView), new { state = ItemState.InProgress})

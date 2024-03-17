@@ -34,6 +34,25 @@ public class ToDoItemService
         return todos;
     }
 
+    public async Task<List<ToDoDisplayDto>> GetAllOfStateAsync(ItemState state)
+    {
+        List<ToDoDisplayDto> todos = await _context.ToDoItems
+            .OrderBy(x => x.Title)
+            .Where(x => x.State == state)
+            .Select(x => new ToDoDisplayDto
+        {
+            Id = x.Id,
+            Title = x.Title,
+            Description = x.Description,
+            State = x.State,
+            DueDate = x.DueDate,
+            DateCreated = x.DateCreated,
+            ToDoList = x.ToDoList
+        }).ToListAsync();
+
+        return todos;
+    }
+
     public async Task<ToDoDisplayDto> GetToDoItemByIdAsync(int id)
     {
         ToDoItem? todo = null;
@@ -78,6 +97,19 @@ public class ToDoItemService
         };
 
         _context.ToDoItems.Add(todo);
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task UpdateItemStatusAsync(int id, ItemState state)
+    {
+        ToDoItem itemToUpdate = await _context.ToDoItems.FindAsync(id);
+        if (itemToUpdate == null) 
+        {
+            throw new InvalidIdException(id);
+        }
+
+        itemToUpdate.State = state;
+        _context.Update(itemToUpdate);
         await _context.SaveChangesAsync();
     }
 }
