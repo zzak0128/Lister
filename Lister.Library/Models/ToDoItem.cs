@@ -8,7 +8,7 @@ public class ToDoItem
 
     public string Title { get; set; } = "";
 
-    public string Description { get; set; } = "";
+    public string? Description { get; set; }
 
     public ItemState State { get; set; } = ItemState.ToDo;
 
