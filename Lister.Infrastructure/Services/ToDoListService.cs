@@ -1,4 +1,5 @@
-﻿using Lister.Application.DTOs.ToDoLists;
+﻿using System.Security.Cryptography.X509Certificates;
+using Lister.Application.DTOs.ToDoLists;
 using Lister.Library.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -26,7 +27,7 @@ public class ToDoListService
                 Title = x.Title,
                 DateCreated = DateTime.Now,
                 ToDoItems = x.ToDoItems
-            }).ToListAsync();
+            }).OrderBy(x => x.Title).ToListAsync();
 
         return toDoLists;
     }

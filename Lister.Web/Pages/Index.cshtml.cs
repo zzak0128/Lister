@@ -1,4 +1,5 @@
 using Lister.Application.DTOs.ToDoItems;
+using Lister.Application.DTOs.ToDoLists;
 using Lister.Infrastructure.Services;
 using Lister.Library.Enums;
 using Microsoft.AspNetCore.Mvc;
@@ -10,10 +11,12 @@ namespace Lister.Web.Pages
     public class IndexModel : PageModel
     {
         private readonly ToDoItemService _todoItems;
+        private readonly ToDoListService _todoLists;
 
-        public IndexModel(ToDoItemService todoItems)
+        public IndexModel(ToDoItemService todoItems, ToDoListService todoLists)
         {
             _todoItems = todoItems;
+            _todoLists = todoLists;
         }
 
         [BindProperty(SupportsGet = true)]    
@@ -21,9 +24,12 @@ namespace Lister.Web.Pages
 
         public List<ToDoDisplayDto> ToDoItems { get; set; }
 
+        public List<ToDoListDisplayDto> Lists { get; set; } = [];
+
         public async Task<IActionResult> OnGetAsync()
         {
             ToDoItems = await _todoItems.GetAllAsync();
+            Lists = await _todoLists.GetAllAsync();
 
             return Page();
         }

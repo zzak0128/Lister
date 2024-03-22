@@ -10,5 +10,5 @@ public class ToDoAddDto
 
     public DateTime? DueDate { get; set; }
 
-    public ToDoList ToDoList { get; set; }
+    public int? ToDoListId { get; set; }
 }

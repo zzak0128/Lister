@@ -1,6 +1,7 @@
 using Lister.Application.DTOs.ToDoItems;
 using Lister.Infrastructure.Services;
 using Lister.Library.Enums;
+using Lister.Library.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Lister.Web.Pages.Components.ToDoTableView
@@ -14,19 +15,32 @@ namespace Lister.Web.Pages.Components.ToDoTableView
             _todoItems = todoItems;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync(ItemState? state)
+        public async Task<IViewComponentResult> InvokeAsync(ItemState? state, ToDoList? todoList)
         {
             List<ToDoDisplayDto> todos = [];
 
             if (state.HasValue)
             {
-                todos = await _todoItems.GetAllOfStateAsync(state.Value);
+                if (todoList is null)
+                {
+                    todos = await _todoItems.GetAllOfStateAsync(state.Value);
+                }
+                else
+                {
+                    todos = await _todoItems.GetAllOfStateAsync(state.Value, todoList);
+                }
             }
             else
             {
-                todos = await _todoItems.GetAllAsync();
+                if (todoList is null)
+                {
+                    todos = await _todoItems.GetAllActiveAsync();
+                }
+                else
+                {
+                    todos = await _todoItems.GetAllActiveAsync(todoList);
+                }
             }
-
 
             return View(todos);
         }

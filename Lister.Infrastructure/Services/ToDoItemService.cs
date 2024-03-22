@@ -53,6 +53,63 @@ public class ToDoItemService
         return todos;
     }
 
+        public async Task<List<ToDoDisplayDto>> GetAllOfStateAsync(ItemState state, ToDoList toDoList)
+    {
+        List<ToDoDisplayDto> todos = await _context.ToDoItems
+            .OrderBy(x => x.Title)
+            .Where(x => x.State == state && x.ToDoList == toDoList)
+            .Select(x => new ToDoDisplayDto
+        {
+            Id = x.Id,
+            Title = x.Title,
+            Description = x.Description,
+            State = x.State,
+            DueDate = x.DueDate,
+            DateCreated = x.DateCreated,
+            ToDoList = x.ToDoList
+        }).ToListAsync();
+
+        return todos;
+    }
+
+public async Task<List<ToDoDisplayDto>> GetAllActiveAsync()
+    {
+        List<ToDoDisplayDto> todos = await _context.ToDoItems
+            .OrderBy(x => x.Title)
+            .Where(x => x.State != ItemState.Done)
+            .Select(x => new ToDoDisplayDto
+        {
+            Id = x.Id,
+            Title = x.Title,
+            Description = x.Description,
+            State = x.State,
+            DueDate = x.DueDate,
+            DateCreated = x.DateCreated,
+            ToDoList = x.ToDoList
+        }).ToListAsync();
+
+        return todos;
+    }
+
+    public async Task<List<ToDoDisplayDto>> GetAllActiveAsync(ToDoList todoList)
+    {
+        List<ToDoDisplayDto> todos = await _context.ToDoItems
+            .OrderBy(x => x.Title)
+            .Where(x => x.State != ItemState.Done && x.ToDoList == todoList)
+            .Select(x => new ToDoDisplayDto
+        {
+            Id = x.Id,
+            Title = x.Title,
+            Description = x.Description,
+            State = x.State,
+            DueDate = x.DueDate,
+            DateCreated = x.DateCreated,
+            ToDoList = x.ToDoList
+        }).ToListAsync();
+
+        return todos;
+    }
+
     public async Task<ToDoDisplayDto> GetToDoItemByIdAsync(int id)
     {
         ToDoItem? todo = null;
@@ -86,6 +143,8 @@ public class ToDoItemService
 
     public async Task AddToDoItemAsync(ToDoAddDto dto)
     {
+        ToDoList AddList = await _context.ToDoLists.Where(x => x.Id == dto.ToDoListId).FirstOrDefaultAsync();
+
         ToDoItem todo = new()
         {
             Title = dto.Title,
@@ -93,7 +152,7 @@ public class ToDoItemService
             DueDate = dto.DueDate,
             DateCreated = DateTime.Now,
             State = ItemState.ToDo,
-            ToDoList = dto.ToDoList
+            ToDoList = AddList
         };
 
         _context.ToDoItems.Add(todo);

@@ -10,15 +10,22 @@
 
 @Html.AntiForgeryToken()
 
-<div class="text-center">
+<div>
     <form asp-page-handler="SaveTodo">
-        <input type="submit" class="btn btn-primary" />
         <input type="text" class="form-control" placeholder="New ToDo" asp-for="@Model.NewToDo.Title" />
         <textarea class="form-control" placeholder="Description" asp-for="@Model.NewToDo.Description"></textarea>
         <input type="date" class="form-control" asp-for="@Model.NewToDo.DueDate" />
+        <select class="form-select" asp-for="@Model.NewToDo.ToDoListId">
+            @foreach(var list in @Model.Lists)
+            {
+                <option value="@list.Id">@list.Title</option>
+            }
+        </select>
+        <input type="submit" class="btn btn-primary" value="Save" />
     </form>
 </div>
 
+<h3>All Active</h3>
 <div id="todotable">
     @await Component.InvokeAsync(nameof(Components.ToDoTableView))
 </div>

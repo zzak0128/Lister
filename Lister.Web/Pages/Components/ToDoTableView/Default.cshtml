@@ -16,6 +16,7 @@ else
                     <th>Description</th>
                     <th>State</th>
                     <th>Due Date</th>
+                    <th>List</th>
                     <th></th>
                 </tr>
             </thead>
@@ -29,6 +30,7 @@ else
                             <select id="select_@item.Id" class="form-select" asp-for="@item.State" asp-items="Html.GetEnumSelectList<Library.Enums.ItemState>()" onchange="updateState(@item.Id)"></select>
                         </td>
                         <td>@item.DueDate.ToDateString()</td>
+                        <td>@item.ToDoList?.Title</td>
                         <td><Button type="button" onclick="deleteToDo(@item.Id)" class="btn btn-danger">Delete</Button></td>
                     </tr>
                 }

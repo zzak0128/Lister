@@ -9,7 +9,7 @@ public class ToDoDisplayDto
 
     public string Title { get; set; } = "";
 
-    public string Description { get; set; } = "";
+    public string? Description { get; set; }
 
     public ItemState State { get; set; }
 

@@ -1,0 +1,34 @@
+﻿@page
+@model MyApp.Namespace.AllListsModel
+@{
+    ViewData["Title"] = "My Lists";
+}
+
+@Html.AntiForgeryToken()
+
+<div>
+    <form asp-page-handler="SaveList">
+        <input type="text" class="form-control" placeholder="New List" asp-for="@Model.AddList.Title" />
+        <input type="submit" class="btn btn-primary" value="Save" />
+    </form>
+</div>
+
+<div>
+    <table class="table table-display">
+        <thead>
+            <tr>
+                <th>List</th>
+                <th>Created</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var list in @Model.ToDoLists)
+            {
+                <tr>
+                    <td>@list.Title</td>
+                    <td>@list.DateCreated</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
