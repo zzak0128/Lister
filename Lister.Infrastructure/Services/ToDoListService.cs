@@ -1,5 +1,6 @@
 ﻿using System.Security.Cryptography.X509Certificates;
 using Lister.Application.DTOs.ToDoLists;
+using Lister.Application.Exceptions;
 using Lister.Library.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -30,6 +31,28 @@ public class ToDoListService
             }).OrderBy(x => x.Title).ToListAsync();
 
         return toDoLists;
+    }
+    public async Task<ToDoListDisplayDto> GetListByIdAsync(int id)
+    {
+        ToDoList toDoList = await _context.ToDoLists
+            .Include(x => x.ToDoItems.OrderBy(x => x.State))
+            .Where(x => x.Id == id)
+            .FirstOrDefaultAsync();
+
+        if (toDoList is null)
+        {
+            throw new InvalidIdException(id);
+        }
+
+        ToDoListDisplayDto listDto = new () 
+        {
+            Id = toDoList.Id,
+            Title = toDoList.Title,
+            DateCreated = toDoList.DateCreated,
+            ToDoItems = toDoList.ToDoItems
+        };
+
+        return listDto;
     }
 
     public async Task AddToDoList(ToDoListAddDto dto)

@@ -19,6 +19,7 @@ public class ToDoItemService
     public async Task<List<ToDoDisplayDto>> GetAllAsync()
     {
         List<ToDoDisplayDto> todos = await _context.ToDoItems
+            .OrderByDescending(x => x.State)
             .OrderBy(x => x.Title)
             .Select(x => new ToDoDisplayDto
         {
@@ -37,6 +38,7 @@ public class ToDoItemService
     public async Task<List<ToDoDisplayDto>> GetAllOfStateAsync(ItemState state)
     {
         List<ToDoDisplayDto> todos = await _context.ToDoItems
+            .OrderByDescending(x => x.State)
             .OrderBy(x => x.Title)
             .Where(x => x.State == state)
             .Select(x => new ToDoDisplayDto
@@ -56,6 +58,7 @@ public class ToDoItemService
         public async Task<List<ToDoDisplayDto>> GetAllOfStateAsync(ItemState state, ToDoList toDoList)
     {
         List<ToDoDisplayDto> todos = await _context.ToDoItems
+            .OrderByDescending(x => x.State)
             .OrderBy(x => x.Title)
             .Where(x => x.State == state && x.ToDoList == toDoList)
             .Select(x => new ToDoDisplayDto
@@ -75,6 +78,7 @@ public class ToDoItemService
 public async Task<List<ToDoDisplayDto>> GetAllActiveAsync()
     {
         List<ToDoDisplayDto> todos = await _context.ToDoItems
+            .OrderByDescending(x => x.State)
             .OrderBy(x => x.Title)
             .Where(x => x.State != ItemState.Done)
             .Select(x => new ToDoDisplayDto
@@ -94,6 +98,7 @@ public async Task<List<ToDoDisplayDto>> GetAllActiveAsync()
     public async Task<List<ToDoDisplayDto>> GetAllActiveAsync(ToDoList todoList)
     {
         List<ToDoDisplayDto> todos = await _context.ToDoItems
+            .OrderByDescending(x => x.State)
             .OrderBy(x => x.Title)
             .Where(x => x.State != ItemState.Done && x.ToDoList == todoList)
             .Select(x => new ToDoDisplayDto

@@ -19,14 +19,16 @@
             <tr>
                 <th>List</th>
                 <th>Created</th>
+                <th>Task Count</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var list in @Model.ToDoLists)
             {
                 <tr>
-                    <td>@list.Title</td>
+                    <td><a asp-page="ListItems" asp-route-id="@list.Id">@list.Title</a></td>
                     <td>@list.DateCreated</td>
+                    <td>@list.ToDoItems.Where(x => x.State != ItemState.Done).Count()</td>
                 </tr>
             }
         </tbody>
