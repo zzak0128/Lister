@@ -1,7 +1,0 @@
-﻿@page
-@model MyApp.Namespace.CompletedModel
-@{
-    ViewData["Title"] = "Completed Items";
-}
-
-@await Component.InvokeAsync(nameof(Components.ToDoTableView), new { state = ItemState.Done})

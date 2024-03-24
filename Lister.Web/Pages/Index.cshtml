@@ -29,3 +29,8 @@
 <div id="todotable">
     @await Component.InvokeAsync(nameof(Components.ToDoTableView))
 </div>
+
+<h3>Done</h3>
+<div>
+    @await Component.InvokeAsync(nameof(Components.ToDoTableView), new { state = ItemState.Done })
+</div>

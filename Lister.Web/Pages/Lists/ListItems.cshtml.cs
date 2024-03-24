@@ -1,10 +1,9 @@
 using Lister.Application.DTOs.ToDoLists;
 using Lister.Infrastructure.Services;
-using Lister.Library.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace MyApp.Namespace
+namespace Lister.Web.Pages.Lists
 {
     public class ListItemsModel : PageModel
     {

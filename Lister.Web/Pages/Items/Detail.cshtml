@@ -1,0 +1,42 @@
+﻿@page "{id:int}"
+@model Lister.Web.Pages.Items.DetailModel
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div>
+    <form asp-page-handler="UpdateToDo">
+        <input type="submit" class="btn btn-primary" value="Save" />
+        <input type="button" class="btn btn-secondary" value="Back" onclick="window.history.back()" />
+
+        <br />
+
+        <label class="form-label">ID</label>
+        <input class="form-control" disabled value="@Model.DetailToDo.Id" />
+
+        <label class="form-label">Title</label>
+        <input type="text" class="form-control" value="@Model.DetailToDo.Title" />
+
+        <label class="form-label">Description</label>
+        <input type="text" class="form-control" value="@Model.DetailToDo.Description" />
+
+        <label class="form-label">DueDate</label>
+        <input type="date" class="form-control" value="@Model.DetailToDo.DueDate" />
+
+        <label class="form-label">Status</label>
+        <select class="form-select" asp-for="@Model.DetailToDo.State"
+            asp-items="Html.GetEnumSelectList<Library.Enums.ItemState>()"
+            onchange="updateState(@Model.DetailToDo.Id)"></select>
+
+        <label></label>
+        <select class="form-select" asp-for="@Model.DetailToDo.ToDoList.Id">
+            @foreach (var list in @Model.Lists)
+            {
+                <option value="@list.Id">@list.Title</option>
+            }
+        </select>
+    </form>
+
+    <label class="form-label">Date Created</label>
+    <input type="text" class="form-control" disabled value="@Model.DetailToDo.DateCreated" />
+</div>

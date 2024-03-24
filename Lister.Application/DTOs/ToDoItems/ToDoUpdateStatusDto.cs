@@ -1,6 +1,6 @@
 ﻿using Lister.Library.Enums;
 
-namespace Lister.Application;
+namespace Lister.Application.DTOs.ToDoItems;
 
 public class ToDoUpdateStatusDto
 {

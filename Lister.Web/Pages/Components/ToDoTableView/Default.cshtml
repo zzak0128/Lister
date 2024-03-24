@@ -9,29 +9,31 @@
 else
 {
     <div>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Description</th>
-                    <th>State</th>
-                    <th>Due Date</th>
-                    <th>List</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach(var item in Model)
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Due Date</th>
+                <th>State</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
                 {
                     <tr>
-                        <td>@item.Title</td>
-                        <td>@item.Description</td>
                         <td>
-                            <select id="select_@item.Id" class="form-select" asp-for="@item.State" asp-items="Html.GetEnumSelectList<Library.Enums.ItemState>()" onchange="updateState(@item.Id)"></select>
+                            <a asp-page="/Items/Detail" asp-route-id="@item.Id">
+                                @item.Title
+                            </a>
                         </td>
+                        <td>@item.Description</td>
                         <td>@item.DueDate.ToDateString()</td>
-                        <td>@item.ToDoList?.Title</td>
-                        <td><Button type="button" onclick="deleteToDo(@item.Id)" class="btn btn-danger">Delete</Button></td>
+                        <td>
+                            <select id="select_@item.Id" class="form-select" asp-for="@item.State"
+                                asp-items="Html.GetEnumSelectList<Library.Enums.ItemState>()"
+                                onchange="updateState(@item.Id)"></select>
+                        </td>
                     </tr>
                 }
             </tbody>
