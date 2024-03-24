@@ -38,5 +38,13 @@ namespace Lister.Web.Pages.Items
 
             return RedirectToPage(new { DetailToDo.Id });
         }
+
+        public async Task<IActionResult> OnPostDeleteToDoAsync()
+        {
+            
+
+            return RedirectToPage("./AllLists");
+        }
+
     }
 }
