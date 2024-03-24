@@ -5,9 +5,8 @@
 }
 
 <div>
-    <form asp-page-handler="UpdateToDo">
+    <form method="post" asp-page-handler="UpdateToDo">
         <input type="submit" class="btn btn-primary" value="Save" />
-        <input type="button" class="btn btn-secondary" value="Back" onclick="window.history.back()" />
 
         <br />
 
@@ -28,13 +27,13 @@
             asp-items="Html.GetEnumSelectList<Library.Enums.ItemState>()"
             onchange="updateState(@Model.DetailToDo.Id)"></select>
 
-        <label></label>
-        <select class="form-select" asp-for="@Model.DetailToDo.ToDoList.Id">
+        <label>List</label>
+        @* <select class="form-select" asp-for="@Model.DetailToDo.ToDoList.Id">
             @foreach (var list in @Model.Lists)
             {
                 <option value="@list.Id">@list.Title</option>
             }
-        </select>
+        </select> *@
     </form>
 
     <label class="form-label">Date Created</label>

@@ -41,13 +41,6 @@ namespace Lister.Web.Pages
             return RedirectToPage();
         }
 
-        public async Task<IActionResult> OnPostDeleteAsync(int id)
-        {
-            await _todoItems.DeleteItemAsync(id);
-
-            return ViewComponent(nameof(Components.ToDoTableView));
-        }
-
         public async Task<IActionResult> OnPostUpdateStatusAsync(int id, ItemState state)
         {
             await _todoItems.UpdateItemStatusAsync(id, state);

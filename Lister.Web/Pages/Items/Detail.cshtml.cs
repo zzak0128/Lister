@@ -17,22 +17,23 @@ namespace Lister.Web.Pages.Items
             _listService = listService;
         }
 
+        //public List<ToDoListDisplayDto> Lists { get; set; } = [];
+
         [BindProperty(SupportsGet = true)]
         public ToDoDetailDto DetailToDo { get; set; }
-
-        public List<ToDoListDisplayDto> Lists { get; set; } = [];
-
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
             DetailToDo = await _todoItems.GetToDoItemByIdAsync(id);
-            Lists = await _listService.GetAllAsync();
+           // Lists = await _listService.GetAllAsync();
 
             return Page();
         }
 
         public async Task<IActionResult> OnPostUpdateToDoAsync()
         {
+            var test = DetailToDo;
+
             await _todoItems.UpdateItemAsync(DetailToDo);
 
             return RedirectToPage(new { DetailToDo.Id });
