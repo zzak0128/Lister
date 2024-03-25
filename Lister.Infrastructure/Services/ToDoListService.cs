@@ -1,5 +1,4 @@
-﻿using System.Security.Cryptography.X509Certificates;
-using Lister.Application.DTOs.ToDoLists;
+﻿using Lister.Application.DTOs.ToDoLists;
 using Lister.Application.Exceptions;
 using Lister.Library.Models;
 using Microsoft.EntityFrameworkCore;
@@ -36,7 +35,7 @@ public class ToDoListService
     public async Task<ToDoListDisplayDto> GetListByIdAsync(int id)
     {
         ToDoList toDoList = await _context.ToDoLists
-            .Include(x => x.ToDoItems.OrderBy(x => x.State))
+            .Include(x => x.ToDoItems.OrderBy(x => x.IsCompleted))
             .Where(x => x.Id == id)
             .FirstOrDefaultAsync();
 

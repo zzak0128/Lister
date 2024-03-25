@@ -1,6 +1,4 @@
-﻿using Lister.Library.Enums;
-
-namespace Lister.Library.Models;
+﻿namespace Lister.Library.Models;
 
 public class ToDoItem
 {
@@ -10,7 +8,9 @@ public class ToDoItem
 
     public string? Description { get; set; }
 
-    public ItemState State { get; set; } = ItemState.ToDo;
+    public bool IsCompleted { get; set; }
+
+    public bool IsPriority { get; set; }
 
     public DateTime? DueDate { get; set; }
 

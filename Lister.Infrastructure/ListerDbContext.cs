@@ -15,8 +15,5 @@ public class ListerDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
-        builder.Entity<ToDoItem>()
-        .Property(x => x.State)
-        .HasConversion<int>();
     }
 }

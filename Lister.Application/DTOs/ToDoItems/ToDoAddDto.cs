@@ -1,6 +1,4 @@
-﻿using Lister.Library.Models;
-
-namespace Lister.Application.DTOs.ToDoItems;
+﻿namespace Lister.Application.DTOs.ToDoItems;
 
 public class ToDoAddDto
 {

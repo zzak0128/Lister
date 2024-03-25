@@ -1,6 +1,6 @@
 ﻿@using Lister.Application.DTOs.ToDoItems
 @using Lister.Application.Extensions
-@model List<ToDoDisplayDto>
+@model List<ToDoTableDto>
 
 @if (!Model.Any())
 {
@@ -13,9 +13,7 @@ else
         <thead>
             <tr>
                 <th>Title</th>
-                <th>Description</th>
-                <th>Due Date</th>
-                <th>State</th>
+                <th>Done</th>
             </tr>
         </thead>
         <tbody>
@@ -27,12 +25,8 @@ else
                                 @item.Title
                             </a>
                         </td>
-                        <td>@item.Description</td>
-                        <td>@item.DueDate.ToDateString()</td>
                         <td>
-                            <select id="select_@item.Id" class="form-select" asp-for="@item.State"
-                                asp-items="Html.GetEnumSelectList<Library.Enums.ItemState>()"
-                                onchange="updateState(@item.Id)"></select>
+                            <input type="checkbox" asp-for="@item.IsCompleted" />
                         </td>
                     </tr>
                 }

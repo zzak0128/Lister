@@ -28,7 +28,7 @@
                 <tr>
                     <td><a asp-page="ListItems" asp-route-id="@list.Id">@list.Title</a></td>
                     <td>@list.DateCreated</td>
-                    <td>@list.ToDoItems.Where(x => x.State != ItemState.Done).Count()</td>
+                    <td>@list.ToDoItems.Where(x => !x.IsCompleted).Count()</td>
                 </tr>
             }
         </tbody>

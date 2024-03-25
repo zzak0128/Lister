@@ -23,9 +23,7 @@
         <input type="date" class="form-control" value="@Model.DetailToDo.DueDate" />
 
         <label class="form-label">Status</label>
-        <select class="form-select" asp-for="@Model.DetailToDo.State"
-            asp-items="Html.GetEnumSelectList<Library.Enums.ItemState>()"
-            onchange="updateState(@Model.DetailToDo.Id)"></select>
+        <input type="checkbox" asp-for="@Model.DetailToDo.IsCompleted"/>
 
         <label>List</label>
         <select class="form-select" asp-for="@Model.DetailToDo.ToDoList">

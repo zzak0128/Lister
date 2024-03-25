@@ -1,6 +1,5 @@
 ﻿using Lister.Application.DTOs.ToDoItems;
 using Lister.Application.Exceptions;
-using Lister.Library.Enums;
 using Lister.Library.Models;
 using Microsoft.EntityFrameworkCore;
 using MySqlConnector;
@@ -16,76 +15,17 @@ public class ToDoItemService
         _context = context;
     }
 
-    public async Task<List<ToDoDisplayDto>> GetAllAsync()
+    public async Task<List<ToDoTableDto>> GetTableViewItems()
     {
-        List<ToDoDisplayDto> todos = await _context.ToDoItems
-            .OrderByDescending(x => x.State)
+        List<ToDoTableDto> todos = await _context.ToDoItems
+            .OrderByDescending(x => x.IsCompleted)
             .OrderBy(x => x.Title)
-            .Select(x => new ToDoDisplayDto
+            .Select(x => new ToDoTableDto
         {
             Id = x.Id,
             Title = x.Title,
-            Description = x.Description,
-            State = x.State,
-            DueDate = x.DueDate,
-            ToDoList = x.ToDoList
-        }).ToListAsync();
-
-        return todos;
-    }
-
-    public async Task<List<ToDoDisplayDto>> GetAllOfStateAsync(ItemState state)
-    {
-        List<ToDoDisplayDto> todos = await _context.ToDoItems
-            .OrderByDescending(x => x.State)
-            .OrderBy(x => x.Title)
-            .Where(x => x.State == state)
-            .Select(x => new ToDoDisplayDto
-        {
-            Id = x.Id,
-            Title = x.Title,
-            Description = x.Description,
-            State = x.State,
-            DueDate = x.DueDate,
-            ToDoList = x.ToDoList
-        }).ToListAsync();
-
-        return todos;
-    }
-
-public async Task<List<ToDoDisplayDto>> GetAllActiveAsync()
-    {
-        List<ToDoDisplayDto> todos = await _context.ToDoItems
-            .OrderByDescending(x => x.State)
-            .OrderBy(x => x.Title)
-            .Where(x => x.State != ItemState.Done)
-            .Select(x => new ToDoDisplayDto
-        {
-            Id = x.Id,
-            Title = x.Title,
-            Description = x.Description,
-            State = x.State,
-            DueDate = x.DueDate,
-            ToDoList = x.ToDoList
-        }).ToListAsync();
-
-        return todos;
-    }
-
-    public async Task<List<ToDoDisplayDto>> GetAllActiveAsync(int listId)
-    {
-        List<ToDoDisplayDto> todos = await _context.ToDoItems
-            .OrderByDescending(x => x.State)
-            .OrderBy(x => x.Title)
-            .Where(x => x.State != ItemState.Done && x.ToDoList.Id == listId)
-            .Select(x => new ToDoDisplayDto
-        {
-            Id = x.Id,
-            Title = x.Title,
-            Description = x.Description,
-            State = x.State,
-            DueDate = x.DueDate,
-            ToDoList = x.ToDoList
+            IsCompleted = x.IsCompleted,
+            IsPriority = x.IsPriority,
         }).ToListAsync();
 
         return todos;
@@ -114,7 +54,8 @@ public async Task<List<ToDoDisplayDto>> GetAllActiveAsync()
             Title = todo.Title,
             Description = todo.Description,
             DueDate = todo.DueDate,
-            State = todo.State,
+            IsCompleted = todo.IsCompleted,
+            IsPriority = todo.IsPriority,
             DateCreated = todo.DateCreated,
             ToDoList = todo.ToDoList
         };
@@ -132,7 +73,7 @@ public async Task<List<ToDoDisplayDto>> GetAllActiveAsync()
             Description = dto.Description,
             DueDate = dto.DueDate,
             DateCreated = DateTime.Now,
-            State = ItemState.ToDo,
+            IsCompleted = false,
             ToDoList = AddList
         };
 
@@ -140,7 +81,7 @@ public async Task<List<ToDoDisplayDto>> GetAllActiveAsync()
         await _context.SaveChangesAsync();
     }
 
-    public async Task UpdateItemStatusAsync(int id, ItemState state)
+    public async Task UpdateItemCompleteAsync(int id)
     {
         ToDoItem itemToUpdate = await _context.ToDoItems.FindAsync(id);
         if (itemToUpdate == null) 
@@ -148,7 +89,7 @@ public async Task<List<ToDoDisplayDto>> GetAllActiveAsync()
             throw new InvalidIdException(id);
         }
 
-        itemToUpdate.State = state;
+        itemToUpdate.IsCompleted = !itemToUpdate.IsCompleted;
         _context.Update(itemToUpdate);
         await _context.SaveChangesAsync();
     }
@@ -165,7 +106,8 @@ public async Task<List<ToDoDisplayDto>> GetAllActiveAsync()
         todo.Title = item.Title;
         todo.Description = item.Description;
         todo.DueDate = item.DueDate;
-        todo.State = item.State;
+        todo.IsCompleted = item.IsCompleted;
+        todo.IsPriority = item.IsPriority;
         todo.ToDoList = item.ToDoList;
 
         _context.ToDoItems.Update(todo);

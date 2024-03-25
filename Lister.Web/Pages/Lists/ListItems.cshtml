@@ -8,5 +8,5 @@
 <h1>@Model.SelectedList.Title</h1>
 
 <div class="todotable">
-    @await Component.InvokeAsync(nameof(Components.ToDoTableView), new { listId = @Model.SelectedList.Id })    
+    @await Component.InvokeAsync(nameof(Components.ToDoTableView))    
 </div>
