@@ -1,8 +1,9 @@
 using Lister.Application.DTOs.ToDoItems;
-using Lister.Application.DTOs.ToDoLists;
 using Lister.Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Lister.Application.DTOs.ToDoLists;
 
 namespace Lister.Web.Pages.Items
 {
@@ -17,7 +18,7 @@ namespace Lister.Web.Pages.Items
             _listService = listService;
         }
 
-        //public List<ToDoListDisplayDto> Lists { get; set; } = [];
+        public List<ToDoListDisplayDto> Lists { get; set; } = [];
 
         [BindProperty(SupportsGet = true)]
         public ToDoDetailDto DetailToDo { get; set; }
@@ -25,7 +26,7 @@ namespace Lister.Web.Pages.Items
         public async Task<IActionResult> OnGetAsync(int id)
         {
             DetailToDo = await _todoItems.GetToDoItemByIdAsync(id);
-           // Lists = await _listService.GetAllAsync();
+            Lists = await _listService.GetAllAsync();
 
             return Page();
         }
@@ -41,7 +42,7 @@ namespace Lister.Web.Pages.Items
 
         public async Task<IActionResult> OnPostDeleteToDoAsync()
         {
-            
+
 
             return RedirectToPage("./AllLists");
         }

@@ -5,7 +5,7 @@
 }
 
 <div>
-    <form method="post" asp-page-handler="UpdateToDo">
+    <form asp-page="./Detail" asp-page-handler="UpdateToDo">
         <input type="submit" class="btn btn-primary" value="Save" />
 
         <br />
@@ -28,12 +28,12 @@
             onchange="updateState(@Model.DetailToDo.Id)"></select>
 
         <label>List</label>
-        @* <select class="form-select" asp-for="@Model.DetailToDo.ToDoList.Id">
+        <select class="form-select" asp-for="@Model.DetailToDo.ToDoList">
             @foreach (var list in @Model.Lists)
             {
                 <option value="@list.Id">@list.Title</option>
             }
-        </select> *@
+        </select>
     </form>
 
     <label class="form-label">Date Created</label>
