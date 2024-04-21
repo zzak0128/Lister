@@ -1,0 +1,50 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+@Html.AntiForgeryToken()
+
+<div>
+    <form asp-page-handler="Add">
+        <input type="text" class="form-control" placeholder="Add new todo" asp-for="@Model.NewToDo" />
+        <input type="submit" class="btn btn-success" value="Save" />
+    </form>
+</div>
+
+<br />
+<hr />
+<br />
+
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Complete</th>
+                <th>Title</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var todo in @Model.AllToDos)
+            {
+                @if (todo.IsComplete)
+                {
+                    <tr>
+                        <td colspan="2">
+                            <span style="color: grey; text-decoration: line-through;">@todo.Title</span>
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    <form asp-page-handler="Complete" asp-route-id="@todo.Id">
+                        <tr>
+                            <td>@todo.Title</td>
+                            <td><input type="submit" class="btn btn-primary" value="Complete" /></td>
+                        </tr>
+                    </form>
+                }
+            }
+        </tbody>
+    </table>
+</div>

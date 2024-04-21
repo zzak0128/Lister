@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../build/Lister.Web.props" />
+</Project>
