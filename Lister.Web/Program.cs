@@ -1,10 +1,11 @@
-using Lister.Web.Classes;
+using Lister.Library.Interfaces;
+using Lister.Library.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
-builder.Services.AddSingleton<ToDoService>();
+builder.Services.AddSingleton<IToDoService, ToDoService>();
 
 var app = builder.Build();
 

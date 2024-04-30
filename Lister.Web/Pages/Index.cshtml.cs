@@ -1,4 +1,5 @@
-using Lister.Web.Classes;
+using Lister.Library.Interfaces;
+using Lister.Library.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -7,14 +8,14 @@ namespace Lister.Web.Pages;
 [ValidateAntiForgeryToken]
 public class IndexModel : PageModel
 {
-    private ToDoService _todos;
+    private IToDoService _todos;
 
-    public IndexModel(ToDoService todos)
+    public IndexModel(IToDoService todos)
     {
         _todos = todos;
     }
 
-    public List<ToDo> AllToDos { get; set; } = [];
+    public List<ToDoModel> AllToDos { get; set; } = [];
 
     [BindProperty(SupportsGet = true)]
     public string NewToDo { get; set; } = "";

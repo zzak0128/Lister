@@ -7,14 +7,27 @@
   "targets": {
     ".NETCoreApp,Version=v8.0": {
       "Lister.Web/1.0.0": {
+        "dependencies": {
+          "Lister.Library": "1.0.0"
+        },
         "runtime": {
           "Lister.Web.dll": {}
+        }
+      },
+      "Lister.Library/1.0.0": {
+        "runtime": {
+          "Lister.Library.dll": {}
         }
       }
     }
   },
   "libraries": {
     "Lister.Web/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Lister.Library/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

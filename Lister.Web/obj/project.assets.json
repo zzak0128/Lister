@@ -1,37 +1,63 @@
 {
   "version": 3,
   "targets": {
-    "net8.0": {}
+    "net8.0": {
+      "Lister.Library/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/Lister.Library.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Lister.Library.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "Lister.Library/1.0.0": {
+      "type": "project",
+      "path": "../Lister.Library/Lister.Library.csproj",
+      "msbuildProject": "../Lister.Library/Lister.Library.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net8.0": []
+    "net8.0": [
+      "Lister.Library >= 1.0.0"
+    ]
   },
   "packageFolders": {
-    "/home/zzak/.nuget/packages/": {}
+    "C:\\Users\\703434671\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/zzak/Development/Lister/Lister.Web/Lister.Web.csproj",
+      "projectUniqueName": "C:\\Users\\703434671\\Repos\\Practice\\Lister\\Lister.Web\\Lister.Web.csproj",
       "projectName": "Lister.Web",
-      "projectPath": "/home/zzak/Development/Lister/Lister.Web/Lister.Web.csproj",
-      "packagesPath": "/home/zzak/.nuget/packages/",
-      "outputPath": "/home/zzak/Development/Lister/Lister.Web/obj/",
+      "projectPath": "C:\\Users\\703434671\\Repos\\Practice\\Lister\\Lister.Web\\Lister.Web.csproj",
+      "packagesPath": "C:\\Users\\703434671\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\703434671\\Repos\\Practice\\Lister\\Lister.Web\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/zzak/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\703434671\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
-        "https://api.nuget.org/v3/index.json": {}
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {},
+        "https://sanfordhealth.pkgs.visualstudio.com/HPEngineering/_packaging/HPEngineering/nuget/v3/index.json": {}
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\703434671\\Repos\\Practice\\Lister\\Lister.Library\\Lister.Library.csproj": {
+              "projectPath": "C:\\Users\\703434671\\Repos\\Practice\\Lister\\Lister.Library\\Lister.Library.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
@@ -67,7 +93,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.204/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
